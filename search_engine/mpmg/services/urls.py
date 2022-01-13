@@ -24,7 +24,7 @@ urlpatterns = [
     # path('metrics', views.MetricsView.as_view(), name='metrics'),
 
     path('openapi/', get_schema_view(
-        title='Áduna',
+        title='Procon',
         description='API para busca de dados não estruturados',
         url='/services/',
         version='1.0.0',

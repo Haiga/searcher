@@ -1,0 +1,8 @@
+cont = 0
+with open('diarios-bh.csv', encoding='utf8') as fi:
+	with open('diarios-bh-new.csv', 'w+', encoding='utf8') as fo:
+		for line in fi:
+			fo.write(line)
+			cont += 1
+			if cont == 500:
+				break

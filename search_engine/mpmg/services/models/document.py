@@ -1,6 +1,7 @@
 from mpmg.services.elastic import Elastic
 from mpmg.services.models.processo import Processo
 from mpmg.services.models.diario import Diario
+from mpmg.services.models.relato import Relato
 from mpmg.services.models.diario_segmentado import DiarioSegmentado
 from mpmg.services.models.licitacao import Licitacao
 from mpmg.services.models.search_configs import SearchableIndicesConfigs

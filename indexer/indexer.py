@@ -64,9 +64,9 @@ def parse_date(text):
 
 
 def parse_date(text):
-    for fmt in ('%Y-%m-%d', "%d-%m-%Y"):
+    for fmt in ('%Y-%m-%d', "%d-%m-%Y", "%d/%m/%Y", "%Y/%m/%d"):
         try:
-            return datetime.datetime.strptime(text, fmt)
+            return datetime.datetime.strptime(text.strip(), fmt)
         except ValueError:
             pass
     raise ValueError('no valid date format found')
@@ -93,7 +93,7 @@ class Indexer:
         Generates formated entries to indexed by the bulk API
         """
         file = open(file_path, encoding=encoding)
-        table = csv.DictReader(file)
+        table = csv.DictReader(file,delimiter="\t")
 
         file_count = open(file_path, encoding=encoding)
         table_count = csv.DictReader(file_count)
@@ -121,7 +121,10 @@ class Indexer:
                     doc[field_name] = eval(line[field])
                 elif field_name == 'data':
                     if line[field] != '':
-                        element = parse_date(line[field])
+                        try:
+                            element = parse_date(line[field])
+                        except:
+                            x = 0
                         timestamp = datetime.datetime.timestamp(element)
                         doc[field_name] = timestamp
                 else:
@@ -145,9 +148,9 @@ class Indexer:
 
         responses = {}
         for csv_file in files_to_index:
-            print("Indexing: " + csv_file)
+            #print("Indexing: " + csv_file)
             responses[csv_file] =  helpers.bulk(self.es, self.generate_formated_csv_lines(csv_file, index) )
-            print("  Response: " + str(responses[csv_file]))
+            #print("  Response: " + str(responses[csv_file]))
 
             if len(responses[csv_file][1]) > 0 :
                 print("Detected error while indexing: " + csv_file)

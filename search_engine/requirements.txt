@@ -18,7 +18,7 @@ numpy==1.17.0
 spacy==2.0.12
 wrapt==1.11.1
 tensorflow==2.2.0
-torch==1.6.0+cu101
+torch==1.6.0+cpu -f https://download.pytorch.org/whl/torch_stable.html
 transformers==4.0.0
 html2text==2020.1.16
 pyyaml==5.4.1 

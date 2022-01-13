@@ -1,72 +1,148 @@
 {
-    "diarios": {
+    "relatos": {
         "mappings": {
             "properties": {
                 "conteudo": {
-                    "type": "text", 
-                    "term_vector": "with_positions_offsets", 
-                    "fields": {
-                        "keyword": {
-                            "type": "keyword", 
-                            "ignore_above": 256
-                        }
-                    }
-                },
-                "embedding_vector": {
-                    "type": "dense_vector",
-                    "dims": 128
-                },
-                "data": {
-                    "type": "date"
-                }, 
-                "data_indexacao": {
-                    "type": "date"
-                }, 
-                "entidade_cep": {
-                    "type": "text", 
-                    "fields": {
-                        "keyword": {
-                            "type": "keyword", 
-                            "ignore_above": 256
-                        }
-                    }
-                },
-                "entidade_cnpj": {
-                    "type": "text", 
+                    "type": "text",
+                    "term_vector": "with_positions_offsets",
                     "fields": {
                         "keyword": {
                             "type": "keyword",
                             "ignore_above": 256
                         }
                     }
-                }, 
-                "entidade_cpf": {
-                    "type": "text", 
+                },
+                "embedding_vector": {
+                    "type": "dense_vector",
+                    "dims": 768
+                },
+                "data": {
+                    "type": "date"
+                },
+                "status": {
+                    "type": "text",
                     "fields": {
                         "keyword": {
-                            "type": "keyword", 
+                            "type": "keyword",
                             "ignore_above": 256
                         }
                     }
-                }, 
+                },
+                "resposta": {
+                    "type": "text",
+                    "term_vector": "with_positions_offsets",
+                    "fields": {
+                        "keyword": {
+                            "type": "keyword",
+                            "ignore_above": 256
+                        }
+                    }
+                },
+                "cidade": {
+                    "type": "text",
+                    "fields": {
+                        "keyword": {
+                            "type": "keyword",
+                            "ignore_above": 256
+                        }
+                    }
+                },
+                "estado": {
+                    "type": "text",
+                    "fields": {
+                        "keyword": {
+                            "type": "keyword",
+                            "ignore_above": 256
+                        }
+                    }
+                },
+                "nome": {
+                    "type": "text",
+                    "term_vector": "with_positions_offsets",
+                    "fields": {
+                        "keyword": {
+                            "type": "keyword",
+                            "ignore_above": 256
+                        }
+                    }
+                },
+                "id": {
+                    "type": "text",
+                    "fields": {
+                        "keyword": {
+                            "type": "keyword",
+                            "ignore_above": 256
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "diarios": {
+        "mappings": {
+            "properties": {
+                "conteudo": {
+                    "type": "text",
+                    "term_vector": "with_positions_offsets",
+                    "fields": {
+                        "keyword": {
+                            "type": "keyword",
+                            "ignore_above": 256
+                        }
+                    }
+                },
+                "embedding_vector": {
+                    "type": "dense_vector",
+                    "dims": 768
+                },
+                "data": {
+                    "type": "date"
+                },
+                "entidade_cep": {
+                    "type": "text",
+                    "fields": {
+                        "keyword": {
+                            "type": "keyword",
+                            "ignore_above": 256
+                        }
+                    }
+                },
+                "entidade_cnpj": {
+                    "type": "text",
+                    "fields": {
+                        "keyword": {
+                            "type": "keyword",
+                            "ignore_above": 256
+                        }
+                    }
+                },
+                "entidade_cpf": {
+                    "type": "text",
+                    "fields": {
+                        "keyword": {
+                            "type": "keyword",
+                            "ignore_above": 256
+                        }
+                    }
+                },
                 "entidade_jurisprudencia": {
                     "type": "text",
                      "fields": {
                         "keyword": {
-                             "type": "keyword", 
+                             "type": "keyword",
                              "ignore_above": 256
                         }
                     }
-                }, 
+                },
                 "entidade_legislacao": {
                     "type": "text",
                     "fields": {
                         "keyword": {
-                            "type": "keyword", 
+                            "type": "keyword",
                             "ignore_above": 256
                         }
                     }
-                }, 
+                },
                 "entidade_legislacao_jurisprudencia": {
                     "type": "text",
                     "fields": {
@@ -75,106 +151,106 @@
                             "ignore_above": 256
                         }
                     }
-                }, 
+                },
                 "entidade_local": {
                     "type": "text",
                     "fields": {
                         "keyword": {
-                            "type": "keyword", 
+                            "type": "keyword",
                             "ignore_above": 256
                         }
                     }
-                }, 
+                },
                 "entidade_municipio": {
-                    "type": "text", 
+                    "type": "text",
                     "fields": {
                         "keyword": {
-                            "type": "keyword", 
+                            "type": "keyword",
                             "ignore_above": 256
                         }
                     }
-                }, 
+                },
                 "entidade_organizacao": {
-                    "type": "text", 
+                    "type": "text",
                     "fields": {
                         "keyword": {
-                            "type": "keyword", 
+                            "type": "keyword",
                             "ignore_above": 256
                         }
                     }
-                }, 
+                },
                 "entidade_pessoa": {
-                    "type": "text", 
+                    "type": "text",
                     "fields": {
                         "keyword": {
-                            "type": "keyword", 
+                            "type": "keyword",
                             "ignore_above": 256
                         }
                     }
-                }, 
+                },
                 "entidade_processo_licitacao": {
-                    "type": "text", 
+                    "type": "text",
                     "fields": {
                         "keyword": {
-                            "type": "keyword", 
+                            "type": "keyword",
                             "ignore_above": 256
                         }
                     }
-                }, 
+                },
                 "entidade_tempo": {
-                    "type": "text", 
+                    "type": "text",
                     "fields": {
                         "keyword": {
-                            "type": "keyword", 
+                            "type": "keyword",
                             "ignore_above": 256
                         }
                     }
-                }, 
+                },
                 "fonte": {
-                    "type": "text", 
+                    "type": "text",
                     "fields": {
                         "keyword": {
-                            "type": "keyword", 
+                            "type": "keyword",
                             "ignore_above": 256
                         }
                     }
-                }, 
+                },
                 "instancia": {
-                    "type": "text", 
+                    "type": "text",
                     "fields": {
                         "keyword": {
-                            "type": "keyword", 
+                            "type": "keyword",
                             "ignore_above": 256
                         }
                     }
-                }, 
+                },
                 "metadata_titulo": {
-                    "type": "text", 
+                    "type": "text",
                     "fields": {
                         "keyword": {
-                            "type": "keyword", 
+                            "type": "keyword",
                             "ignore_above": 256
                         }
                     }
-                }, 
+                },
                 "metadata_ultima_modificacao": {
                     "type": "date"
-                }, 
+                },
                 "tipo_documento": {
-                    "type": "text", 
+                    "type": "text",
                     "fields": {
                         "keyword": {
-                            "type": "keyword", 
+                            "type": "keyword",
                             "ignore_above": 256
                         }
                     }
-                }, 
+                },
                 "titulo": {
-                    "type": "text", 
-                    "term_vector": "with_positions_offsets", 
+                    "type": "text",
+                    "term_vector": "with_positions_offsets",
                     "fields": {
                         "keyword": {
-                            "type": "keyword", 
+                            "type": "keyword",
                             "ignore_above": 256
                         }
                     }
@@ -186,79 +262,79 @@
         "mappings": {
             "properties": {
                 "id_pai": {
-                    "type": "text", 
+                    "type": "text",
                     "fields": {
                         "keyword": {
-                            "type": "keyword", 
+                            "type": "keyword",
                             "ignore_above": 256
                         }
                     }
                 },
                 "titulo_diario": {
-                    "type": "text", 
-                    "term_vector": "with_positions_offsets", 
+                    "type": "text",
+                    "term_vector": "with_positions_offsets",
                     "fields": {
                         "keyword": {
-                            "type": "keyword", 
+                            "type": "keyword",
                             "ignore_above": 256
                         }
                     }
                 },
                 "titulo": {
-                    "type": "text", 
-                    "term_vector": "with_positions_offsets", 
+                    "type": "text",
+                    "term_vector": "with_positions_offsets",
                     "fields": {
                         "keyword": {
-                            "type": "keyword", 
+                            "type": "keyword",
                             "ignore_above": 256
                         }
                     }
                 },
                 "subtitulo": {
-                    "type": "text", 
-                    "term_vector": "with_positions_offsets", 
+                    "type": "text",
+                    "term_vector": "with_positions_offsets",
                     "fields": {
                         "keyword": {
-                            "type": "keyword", 
+                            "type": "keyword",
                             "ignore_above": 256
                         }
                     }
                 },
                 "publicador": {
-                    "type": "text", 
-                    "term_vector": "with_positions_offsets", 
+                    "type": "text",
+                    "term_vector": "with_positions_offsets",
                     "fields": {
                         "keyword": {
-                            "type": "keyword", 
+                            "type": "keyword",
                             "ignore_above": 256
                         }
                     }
                 },
                 "id_interno": {
-                    "type": "text", 
+                    "type": "text",
                     "fields": {
                         "keyword": {
-                            "type": "keyword", 
+                            "type": "keyword",
                             "ignore_above": 256
                         }
                     }
                 },
                 "entidade_bloco": {
-                    "type": "text", 
-                    "term_vector": "with_positions_offsets", 
+                    "type": "text",
+                    "term_vector": "with_positions_offsets",
                     "fields": {
                         "keyword": {
-                            "type": "keyword", 
+                            "type": "keyword",
                             "ignore_above": 256
                         }
                     }
                 },
                 "conteudo": {
-                    "type": "text", 
-                    "term_vector": "with_positions_offsets", 
+                    "type": "text",
+                    "term_vector": "with_positions_offsets",
                     "fields": {
                         "keyword": {
-                            "type": "keyword", 
+                            "type": "keyword",
                             "ignore_above": 256
                         }
                     }
@@ -274,59 +350,56 @@
                 },
                 "embedding_vector": {
                     "type": "dense_vector",
-                    "dims": 128
+                    "dims": 768
                 },
                 "data": {
                     "type": "date"
-                }, 
-                "data_indexacao": {
-                    "type": "date"
-                }, 
-                "entidade_cep": {
-                    "type": "text", 
-                    "fields": {
-                        "keyword": {
-                            "type": "keyword", 
-                            "ignore_above": 256
-                        }
-                    }
                 },
-                "entidade_cnpj": {
-                    "type": "text", 
+                "entidade_cep": {
+                    "type": "text",
                     "fields": {
                         "keyword": {
                             "type": "keyword",
                             "ignore_above": 256
                         }
                     }
-                }, 
-                "entidade_cpf": {
-                    "type": "text", 
+                },
+                "entidade_cnpj": {
+                    "type": "text",
                     "fields": {
                         "keyword": {
-                            "type": "keyword", 
+                            "type": "keyword",
                             "ignore_above": 256
                         }
                     }
-                }, 
+                },
+                "entidade_cpf": {
+                    "type": "text",
+                    "fields": {
+                        "keyword": {
+                            "type": "keyword",
+                            "ignore_above": 256
+                        }
+                    }
+                },
                 "entidade_jurisprudencia": {
                     "type": "text",
                      "fields": {
                         "keyword": {
-                             "type": "keyword", 
+                             "type": "keyword",
                              "ignore_above": 256
                         }
                     }
-                }, 
+                },
                 "entidade_legislacao": {
                     "type": "text",
                     "fields": {
                         "keyword": {
-                            "type": "keyword", 
+                            "type": "keyword",
                             "ignore_above": 256
                         }
                     }
-                }, 
+                },
                 "entidade_legislacao_jurisprudencia": {
                     "type": "text",
                     "fields": {
@@ -335,96 +408,96 @@
                             "ignore_above": 256
                         }
                     }
-                }, 
+                },
                 "entidade_local": {
                     "type": "text",
                     "fields": {
                         "keyword": {
-                            "type": "keyword", 
+                            "type": "keyword",
                             "ignore_above": 256
                         }
                     }
-                }, 
+                },
                 "entidade_municipio": {
-                    "type": "text", 
+                    "type": "text",
                     "fields": {
                         "keyword": {
-                            "type": "keyword", 
+                            "type": "keyword",
                             "ignore_above": 256
                         }
                     }
-                }, 
+                },
                 "entidade_organizacao": {
-                    "type": "text", 
+                    "type": "text",
                     "fields": {
                         "keyword": {
-                            "type": "keyword", 
+                            "type": "keyword",
                             "ignore_above": 256
                         }
                     }
-                }, 
+                },
                 "entidade_pessoa": {
-                    "type": "text", 
+                    "type": "text",
                     "fields": {
                         "keyword": {
-                            "type": "keyword", 
+                            "type": "keyword",
                             "ignore_above": 256
                         }
                     }
-                }, 
+                },
                 "entidade_processo_licitacao": {
-                    "type": "text", 
+                    "type": "text",
                     "fields": {
                         "keyword": {
-                            "type": "keyword", 
+                            "type": "keyword",
                             "ignore_above": 256
                         }
                     }
-                }, 
+                },
                 "entidade_tempo": {
-                    "type": "text", 
+                    "type": "text",
                     "fields": {
                         "keyword": {
-                            "type": "keyword", 
+                            "type": "keyword",
                             "ignore_above": 256
                         }
                     }
-                }, 
+                },
                 "fonte": {
-                    "type": "text", 
+                    "type": "text",
                     "fields": {
                         "keyword": {
-                            "type": "keyword", 
+                            "type": "keyword",
                             "ignore_above": 256
                         }
                     }
-                }, 
+                },
                 "instancia": {
-                    "type": "text", 
+                    "type": "text",
                     "fields": {
                         "keyword": {
-                            "type": "keyword", 
+                            "type": "keyword",
                             "ignore_above": 256
                         }
                     }
-                }, 
+                },
                 "metadata_titulo": {
-                    "type": "text", 
+                    "type": "text",
                     "fields": {
                         "keyword": {
-                            "type": "keyword", 
+                            "type": "keyword",
                             "ignore_above": 256
                         }
                     }
-                }, 
+                },
                 "metadata_ultima_modificacao": {
                     "type": "date"
-                }, 
+                },
                 "tipo_documento": {
-                    "type": "text", 
+                    "type": "text",
                     "fields": {
                         "keyword": {
-                            "type": "keyword", 
+                            "type": "keyword",
                             "ignore_above": 256
                         }
                     }
@@ -447,7 +520,7 @@
                 },
                 "embedding_vector": {
                     "type": "dense_vector",
-                    "dims": 128
+                    "dims": 768
                 },
                 "conteudo": {
                     "type": "text",
@@ -503,9 +576,6 @@
                             "ignore_above": 256
                         }
                     }
-                },
-                "data_indexacao": {
-                    "type": "date"
                 }
             }
         }
@@ -535,7 +605,7 @@
                 },
                 "embedding_vector": {
                     "type": "dense_vector",
-                    "dims": 128
+                    "dims": 768
                 },
                 "tipo_documento":{
                     "type": "text",
@@ -567,9 +637,6 @@
                 "data":{
                     "type": "date"
                 },
-                "data_indexacao": {
-                    "type": "date"
-                }, 
                 "entidade_pessoa":{
                     "type": "text",
                     "fields": {
