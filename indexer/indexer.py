@@ -88,7 +88,7 @@ class Indexer:
 
         csv.field_size_limit(int(ctypes.c_ulong(-1).value // 2))
 
-    def generate_formated_csv_lines(self, file_path, index, encoding="utf8"):
+    def generate_formated_csv_lines(self, file_path, index, encoding="latin-1"):
         """
         Generates formated entries to indexed by the bulk API
         """
