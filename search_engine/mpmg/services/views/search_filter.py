@@ -155,8 +155,9 @@ class SearchFilterView(APIView):
 
 
     def _get_doc_types(self):
-        return [('Diários Oficiais','diarios'), ('Diários Segmentados', 'diarios_segmentado'), ('Processos','processos'), ('Licitações','licitacoes')]
-    
+        # return [('Diários Oficiais','diarios'), ('Diários Segmentados', 'diarios_segmentado'), ('Processos','processos'), ('Licitações','licitacoes')]
+        return [('Relatos','relatos'), ('Reclame Aqui', 'reclameaqui'), ('Procon','procon')]
+
     
     def _get_instances(self):
         return ['Belo Horizonte', 'Uberlândia', 'São Lourenço', 'Minas Gerais', 'Ipatinga', 'Associação Mineira de Municípios', 'Governador Valadares', 'Uberaba', 'Araguari', 'Poços de Caldas', 'Varginha', 'Tribunal Regional Federal da 2ª Região - TRF2','Obras TCE']

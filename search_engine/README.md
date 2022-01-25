@@ -24,6 +24,6 @@ python manage.py runserver
 
 ## Em seguida acesse:
 
-http://127.0.0.1:8000/aduna/
+http://127.0.0.1:8000/search/
 
 

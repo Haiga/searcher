@@ -6,15 +6,15 @@ from django.contrib.auth.admin import GroupAdmin, UserAdmin
 from mpmg.admin.views import *
 
 
-class AdunaAdmin(admin.AdminSite):
+class searchAdmin(admin.AdminSite):
 
     def __init__(self):
         self.results_per_page = 10
-        super(AdunaAdmin, self).__init__()
+        super(searchAdmin, self).__init__()
 
   
     def get_urls(self):
-        native_urls = super(AdunaAdmin, self).get_urls()
+        native_urls = super(searchAdmin, self).get_urls()
         new_urls = [
             path('', self.admin_view(DashboardView().view_dashboard), name='index'),
             path('log_search/', self.admin_view(LogSearchView().view_log_search), name='log_search'),
@@ -27,6 +27,6 @@ class AdunaAdmin(admin.AdminSite):
     
     
 
-custom_admin_site = AdunaAdmin()
+custom_admin_site = searchAdmin()
 custom_admin_site.register(Group, GroupAdmin)
 custom_admin_site.register(User, UserAdmin)

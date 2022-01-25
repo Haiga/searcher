@@ -3,7 +3,7 @@
  
  - **Indexação dos dados:** Enquanto o pipeline de processamento e indexação está em desenvolvimento, temos scripts para indexar coleções no ambiente de testes e também amostra dos dados para indexar localmente na sua máquina. Para mais informações, acesse o diretório indexer.
  - **API de busca:** Parte principal deste projeto responsável por todo a interação com os dados não estruturados. Está disponibilizado em forma de uma API REST para que seja possível integrar com qualquer sistema. Para ter acesso a todos os endpoints e seus parametros, acesse: http://127.0.0.1:8000/services/swagger-ui
- - **Interface para a API:** Interface temporária para mostrar e testar o uso da API. Para tal, acesse: http://127.0.0.1:8000/aduna
+ - **Interface para a API:** Interface temporária para mostrar e testar o uso da API. Para tal, acesse: http://127.0.0.1:8000/search
 
 # Como rodar o projeto na sua máquina
   1. Baixe este projeto na sua máquina e baixe a versão mais recente do Elasticsearch

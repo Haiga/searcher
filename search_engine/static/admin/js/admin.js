@@ -112,7 +112,7 @@ $(function(){
 						var doc_type = response['consultas'][id_consulta]['paginas'][num_pagina]['tipos'][i];
 						var doc_id = response['consultas'][id_consulta]['paginas'][num_pagina]['documentos'][i];
 						var clicked = response['consultas'][id_consulta]['paginas'][num_pagina]['cliques'][i];
-						var link = '/aduna/document/'+doc_type+'/'+doc_id;
+						var link = '/search/document/'+doc_type+'/'+doc_id;
 						tab_content.find('.detalhe-documentos tbody').append(
 							'<tr><td align="center">'+num+'</td>'+
 							'<td>'+doc_type+'</td>'+

@@ -18,7 +18,7 @@ from .admin.admin import custom_admin_site
 from django.urls import include, path
 
 urlpatterns = [
-    path('aduna/', include('aduna.urls')),
+    path('search/', include('search.urls')),
     path('services/', include('mpmg.services.urls')),
     # path('admin/', admin.site.urls),
     path('admin/', custom_admin_site.urls),

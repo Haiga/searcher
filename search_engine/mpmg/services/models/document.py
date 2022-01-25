@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from mpmg.services.elastic import Elastic
 from mpmg.services.models.processo import Processo
 from mpmg.services.models.diario import Diario
@@ -57,9 +59,11 @@ class Document:
                 dict_data['description'] = 'Sem descrição.'
             dict_data['rank_number'] = results_per_page * (page_number-1) + (i+1)
             dict_data['type'] = item.meta.index
-            
+
             result_class = self.index_to_class[item.meta.index]
-            documents.append(result_class(**dict_data))
+            doc = (result_class(**dict_data))
+            # doc.data = datetime.fromtimestamp(doc.data)
+            documents.append(doc)
         
         return total_docs, total_pages, documents, response.took
         
