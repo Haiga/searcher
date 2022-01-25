@@ -23,7 +23,7 @@ if args['f'] != None:
 if args['d'] != None:
     for folder in args['d']:
         for f in list_files(folder):
-            files_to_index.append(f)
+            files_to_index.append(f.endswith(".csv"))
 
 if args["strategy"] == "simple" and args['t'] != None:
     print("WARNING: Argument -t (Threadpool size) is not applicable.")
