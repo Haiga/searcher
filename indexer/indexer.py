@@ -73,7 +73,7 @@ def parse_date(text):
 
 class Indexer:
 
-    def __init__(self, elastic_address='localhost:9200', model_path="neuralmind/bert-base-portuguese-cased", username=None, password=None):
+    def __init__(self, elastic_address='localhost:9200', model_path="/home/silvapedro/searcher/search_engine", username=None, password=None):
 
         self.ELASTIC_ADDRESS = elastic_address
 
