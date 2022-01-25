@@ -11,7 +11,7 @@ if not dir.endswith('/'):
 for file in files:
 	# Read and store content
 	# of an excel file 
-	read_file = pd.read_excel(dir + file)
+	read_file = pd.read_excel(dir + file, engine='openpyxl')
 	 
 	#read_file = read_file.iloc[: , 1:]
 	read_file = read_file.rename(columns={read_file.columns[0]:'id', 'Relato':'conteudo'})
