@@ -42,7 +42,7 @@ def get_dense_vector(model, text_list):
     return vectors[0]
 
 
-def get_sentence_model(model_path="neuralmind/bert-base-portuguese-cased"):
+def get_sentence_model(model_path="/home/silvapedro/searcher/search_engine"):
     word_embedding_model = models.Transformer(model_path, max_seq_length=500)
     pooling_model = models.Pooling(word_embedding_model.get_word_embedding_dimension())
 
