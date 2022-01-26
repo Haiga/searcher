@@ -11,7 +11,8 @@ class Reranker():
     
     # def get_sentence_model(self, model_path="prajjwal1/bert-tiny"):
     def get_sentence_model(self, model_path="/home/silvapedro/searcher/search_engine/bert-base-portuguese-cased/temp/"):
-        word_embedding_model = models.Transformer(model_path, max_seq_length=500)
+        args = {'from_pt':True}
+        word_embedding_model = models.Transformer(model_path, max_seq_length=500, **args)
         pooling_model = models.Pooling(word_embedding_model.get_word_embedding_dimension())
 
         return SentenceTransformer(modules=[word_embedding_model, pooling_model])
