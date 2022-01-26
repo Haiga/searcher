@@ -13,7 +13,7 @@ from collections import defaultdict
 
 def index(request):
     if not request.session.get('auth_token'):
-        return redirect('/search/login')
+        return redirect('/search_engine/search//login')
 
     context = {
         'user_name': request.session.get('user_info')['first_name'],
@@ -25,7 +25,7 @@ def index(request):
 
 def search(request):
     if request.GET.get('invalid_query', False) or not request.session.get('auth_token'):
-        return redirect('/search/login')
+        return redirect('/search_engine/search//login')
 
     headers = {'Authorization': 'Token ' + request.session.get('auth_token')}
 
@@ -84,12 +84,12 @@ def search(request):
 
     if service_response.status_code == 500:
         messages.add_message(request, messages.ERROR, response_content['error_message'], extra_tags='danger')
-        return redirect('/search/erro')
+        return redirect('/search_engine/search//erro')
 
     elif service_response.status_code == 401:
         request.session['auth_token'] = None
         request.session['user_info'] = None
-        return redirect('/search/login')
+        return redirect('/search_engine/search//login')
 
     else:
         for doc in response_content['documents']:
@@ -135,7 +135,7 @@ def search(request):
 
 def document(request, doc_type, doc_id):
     if not request.session.get('auth_token'):
-        return redirect('/search/login')
+        return redirect('/search_engine/search//login')
 
     headers = {'Authorization': 'Token ' + request.session.get('auth_token')}
     sid = request.session.session_key
@@ -145,7 +145,7 @@ def document(request, doc_type, doc_id):
     if service_response.status_code == 401:
         request.session['auth_token'] = None
         request.session['user_info'] = None
-        return redirect('/search/login')
+        return redirect('/search_engine/search//login')
     else:
         query = request.GET['query']
         pessoa_filter = request.GET.getlist('pessoa', [])
@@ -190,7 +190,7 @@ def document(request, doc_type, doc_id):
 def login(request):
     if request.method == 'GET':
         if request.session.get('auth_token'):
-            return redirect('/search/')
+            return redirect('/search_engine/search//')
         return render(request, 'search/login.html')
 
     elif request.method == 'POST':
@@ -199,17 +199,17 @@ def login(request):
         service_response = requests.post(settings.SERVICES_URL + 'login', {'username': username, 'password': password})
         if service_response.status_code == 401:
             messages.add_message(request, messages.ERROR, 'Usuário ou senha inválidos.', extra_tags='danger')
-            return redirect('/search/login')
+            return redirect('/search_engine/search//login')
         else:
             response_content = service_response.json()
             request.session['user_info'] = response_content['user_info']
             request.session['auth_token'] = response_content['token']
-            return redirect('/search/')
+            return redirect('/search_engine/search//')
 
 
 def logout(request):
     if not request.session.get('auth_token'):
-        return redirect('/search/login')
+        return redirect('/search_engine/search//login')
 
     headers = {'Authorization': 'Token ' + request.session.get('auth_token')}
     service_response = requests.post(settings.SERVICES_URL + 'logout', headers=headers)
@@ -217,7 +217,7 @@ def logout(request):
     messages.add_message(request, messages.INFO, 'Você saiu.', extra_tags='info')
     request.session['user_info'] = None
     request.session['auth_token'] = None
-    return redirect('/search/login')
+    return redirect('/search_engine/search//login')
 
 
 def erro(request):
@@ -226,7 +226,7 @@ def erro(request):
 
 def search_comparison(request):
     if request.GET.get('invalid_query', False) or not request.session.get('auth_token'):
-        return redirect('/search/login')
+        return redirect('/search_engine/search//login')
 
     headers = {'Authorization': 'Token ' + request.session.get('auth_token')}
 
@@ -258,12 +258,12 @@ def search_comparison(request):
 
     if service_response.status_code == 500:
         messages.add_message(request, messages.ERROR, response_content['error_message'], extra_tags='danger')
-        return redirect('/search/erro')
+        return redirect('/search_engine/search//erro')
 
     elif service_response.status_code == 401:
         request.session['auth_token'] = None
         request.session['user_info'] = None
-        return redirect('/search/login')
+        return redirect('/search_engine/search//login')
 
     else:
         # Verificação dos ids de resposta
@@ -323,7 +323,7 @@ def search_comparison(request):
 
 def search_comparison_entity(request):
     if request.GET.get('invalid_query', False) or not request.session.get('auth_token'):
-        return redirect('/search/login')
+        return redirect('/search_engine/search//login')
 
     headers = {'Authorization': 'Token ' + request.session.get('auth_token')}
 
@@ -355,12 +355,12 @@ def search_comparison_entity(request):
 
     if service_response.status_code == 500:
         messages.add_message(request, messages.ERROR, response_content['error_message'], extra_tags='danger')
-        return redirect('/search/erro')
+        return redirect('/search_engine/search//erro')
 
     elif service_response.status_code == 401:
         request.session['auth_token'] = None
         request.session['user_info'] = None
-        return redirect('/search/login')
+        return redirect('/search_engine/search//login')
 
     else:
         # Verificação dos ids de resposta
