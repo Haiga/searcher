@@ -42,7 +42,7 @@ def get_dense_vector(model, text_list):
     return vectors[0]
 
 
-def get_sentence_model(model_path="/home/silvapedro/searcher/bert-base-portuguese-cased/"):
+def get_sentence_model(model_path="/home/silvapedro/searcher/search_engine/bert-base-portuguese-cased/"):
     word_embedding_model = models.Transformer(model_path, max_seq_length=500)
     pooling_model = models.Pooling(word_embedding_model.get_word_embedding_dimension())
 
@@ -73,7 +73,7 @@ def parse_date(text):
 
 class Indexer:
 
-    def __init__(self, elastic_address='localhost:9200', model_path="/home/silvapedro/searcher/bert-base-portuguese-cased/", username=None, password=None):
+    def __init__(self, elastic_address='localhost:9200', model_path="/home/silvapedro/searcher/search_engine/bert-base-portuguese-cased/", username=None, password=None):
 
         self.ELASTIC_ADDRESS = elastic_address
 
