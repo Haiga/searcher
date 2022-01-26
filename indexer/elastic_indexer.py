@@ -10,7 +10,7 @@ parser.add_argument("-t", help="Threadpool size to use for the bulk requests")
 parser.add_argument("-elastic_address", default="localhost:9200", help="Elasticsearch address. Format: <ip>:<port>")
 parser.add_argument("-username", nargs='?', help="Username to access elasticsearch if needed.")
 parser.add_argument("-password", nargs='?', help="Password to access elasticsearch if needed.")
-parser.add_argument("-model_path", default="neuralmind/bert-base-portuguese-cased", help="Model Path")
+parser.add_argument("-model_path", default="/home/silvapedro/searcher/search_engine", help="Model Path")
 args = vars(parser.parse_args()) 
 
 index = args["index"]
