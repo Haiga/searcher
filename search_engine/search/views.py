@@ -41,10 +41,14 @@ def search(request):
     filter_end_date = request.GET.get('filter_end_date', None)
     if filter_end_date == "":
         filter_end_date = None
+
     filter_entidade_pessoa = request.GET.getlist('filter_entidade_pessoa', [])
     filter_entidade_municipio = request.GET.getlist('filter_entidade_municipio', [])
     filter_entidade_organizacao = request.GET.getlist('filter_entidade_organizacao', [])
     filter_entidade_local = request.GET.getlist('filter_entidade_local', [])
+    filter_cidade = request.GET.getlist('filter_cidade', [])
+    filter_estado = request.GET.getlist('filter_estado', [])
+    filter_status = request.GET.getlist('filter_status', [])
 
     # busca as opções do filtro
     params = {
@@ -57,6 +61,9 @@ def search(request):
         'filter_entidade_municipio': filter_entidade_municipio,
         'filter_entidade_organizacao': filter_entidade_organizacao,
         'filter_entidade_local': filter_entidade_local,
+        'filter_cidade': filter_cidade,
+        'filter_estado': filter_estado,
+        'filter_status': filter_status,
     }
     filter_response = requests.get(settings.SERVICES_URL + 'search_filter/all', params, headers=headers)
     filter_content = filter_response.json()
@@ -78,6 +85,9 @@ def search(request):
         'filter_entidade_municipio': filter_entidade_municipio,
         'filter_entidade_organizacao': filter_entidade_organizacao,
         'filter_entidade_local': filter_entidade_local,
+        'filter_cidade': filter_cidade,
+        'filter_estado': filter_estado,
+        'filter_status': filter_status,
     }
     service_response = requests.get(settings.SERVICES_URL + 'search', params, headers=headers)
     response_content = service_response.json()
@@ -125,9 +135,14 @@ def search(request):
             'filter_entidade_municipio': filter_entidade_municipio,
             'filter_entidade_organizacao': filter_entidade_organizacao,
             'filter_entidade_local': filter_entidade_local,
+            'filter_cidade': filter_cidade,
+            'filter_estado': filter_estado,
+            'filter_status': filter_status,
             'filter_url': '&pessoa=' + '&pessoa='.join(filter_entidade_pessoa) + '&municipio=' + '&municipio='.join(
                 filter_entidade_municipio) + '&organizacao=' + '&organizacao='.join(
                 filter_entidade_organizacao) + '&local=' + '&local='.join(filter_entidade_local)
+
+            # + '&cidade=' + '&cidade='.join(filter_cidade)
         }
 
         return render(request, 'search/search.html', context)

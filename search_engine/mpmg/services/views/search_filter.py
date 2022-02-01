@@ -110,7 +110,7 @@ class SearchFilterView(APIView):
         query_filter = QueryFilter.create_from_request(request)
 
 
-        tipos_entidades = ['entidade_pessoa', 'entidade_municipio', 'entidade_local', 'entidade_organizacao']
+        tipos_entidades = ['status','estado','cidade','entidade_pessoa', 'entidade_municipio', 'entidade_local', 'entidade_organizacao']
         
         elastic = Elastic()
         
@@ -135,7 +135,10 @@ class SearchFilterView(APIView):
         for doc in response:
             for campo_entidade in tipos_entidades:
                 try:
-                   entities_list = eval(doc[campo_entidade])
+                    if isinstance(doc[campo_entidade], str):
+                        entities_list = [doc[campo_entidade]]
+                    else:
+                        entities_list = eval(doc[campo_entidade])
                 except:
                     entities_list = []
                 for ent in entities_list:

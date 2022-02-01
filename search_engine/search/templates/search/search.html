@@ -59,20 +59,45 @@
                             </select>
                         </div>
 
-
+                        {% if filter_entities_list.cidade|length > 0 %}
                         <div class="form-group">
-                            <label class="control-label mb-0">Incluir município:</label>
-                            <select id="filter_entidade_municipio" name="filter_entidade_municipio" multiple="multiple">
-                                {% for item in filter_entities_list.entidade_municipio %}
-                                    <option value="{{ item }}" style="text-transform: capitalize;" {% if item in filter_entidade_municipio %}selected="selected"{% endif %}>
+                            <label class="control-label mb-0">Incluir cidade:</label>
+                            <select id="filter_cidade" name="filter_cidade" multiple="multiple">
+                                {% for item in filter_entities_list.cidade %}
+                                    <option value="{{ item }}" style="text-transform: capitalize;" {% if item in filter_cidade %}selected="selected"{% endif %}>
                                     {{ item }}
                                     </option>
                                 {% endfor %}
                             </select>
                         </div>
-                        {% if filter_entities_list.entidade_municipio|length > 0 %}
-
                         {% endif %}
+
+                        {% if filter_entities_list.estado|length > 0 %}
+                        <div class="form-group">
+                            <label class="control-label mb-0">Incluir estado:</label>
+                            <select id="filter_estado" name="filter_estado" multiple="multiple">
+                                {% for item in filter_entities_list.estado %}
+                                    <option value="{{ item }}" style="text-transform: capitalize;" {% if item in filter_estado %}selected="selected"{% endif %}>
+                                    {{ item }}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        {% endif %}
+
+                        {% if filter_entities_list.status|length > 0 %}
+                        <div class="form-group">
+                            <label class="control-label mb-0">Incluir status:</label>
+                            <select id="filter_status" name="filter_status" multiple="multiple">
+                                {% for item in filter_entities_list.status %}
+                                    <option value="{{ item }}" style="text-transform: capitalize;" {% if item in filter_status %}selected="selected"{% endif %}>
+                                    {{ item }}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        {% endif %}
+
 
 
 

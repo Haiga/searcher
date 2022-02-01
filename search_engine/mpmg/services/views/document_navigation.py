@@ -62,6 +62,9 @@ class DocumentNavigationView(APIView):
         query = request.GET.get('query', None)
         filter_entidade_pessoa = request.GET.getlist('filter_entidade_pessoa', [])
         filter_entidade_municipio = request.GET.getlist('filter_entidade_municipio', [])
+        filter_cidade = request.GET.getlist('filter_cidade', [])
+        filter_estado = request.GET.getlist('filter_estado', [])
+        filter_status = request.GET.getlist('filter_status', [])
         filter_entidade_organizacao = request.GET.getlist('filter_entidade_organizacao', [])
         local_filter = request.GET.getlist('local_filter', [])
 

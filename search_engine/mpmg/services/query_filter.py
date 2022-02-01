@@ -42,6 +42,9 @@ class QueryFilter:
         
         entidade_pessoa_filter = request.GET.getlist('filter_entidade_pessoa', [])
         entidade_municipio_filter = request.GET.getlist('filter_entidade_municipio', [])
+        cidade_filter = request.GET.getlist('filter_cidade', [])
+        status_filter = request.GET.getlist('filter_status', [])
+        estado_filter = request.GET.getlist('filter_estado', [])
         entidade_organizacao_filter = request.GET.getlist('filter_entidade_organizacao', [])
         entidade_local_filter = request.GET.getlist('filter_entidade_local', [])
         filter_entities_selected = {}
@@ -49,6 +52,12 @@ class QueryFilter:
             filter_entities_selected['entidade_pessoa'] = entidade_pessoa_filter
         if len(entidade_municipio_filter) > 0:
             filter_entities_selected['entidade_municipio'] = entidade_municipio_filter
+        if len(cidade_filter) > 0:
+            filter_entities_selected['cidade'] = cidade_filter
+        if len(estado_filter) > 0:
+            filter_entities_selected['estado'] = estado_filter
+        if len(status_filter) > 0:
+            filter_entities_selected['status'] = status_filter
         if len(entidade_organizacao_filter) > 0:
             filter_entities_selected['entidade_organizacao'] = entidade_organizacao_filter
         if len(entidade_local_filter) > 0:

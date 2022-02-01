@@ -86,7 +86,7 @@ $(function(){
         buttonWidth: '100%',
     });
 
-    $('#filter_entidade_pessoa, #filter_entidade_municipio, #filter_entidade_organizacao, #filter_entidade_local').multiselect({
+    $('#filter_entidade_pessoa, #filter_entidade_municipio, #filter_entidade_organizacao, #filter_entidade_local, #filter_cidade, #filter_estado, #filter_status').multiselect({
         includeSelectAllOption: true,
         enableFiltering: true,
         selectAllText: 'Selecionar todos',
