@@ -78,6 +78,56 @@
             }
         }
     },
+    "consumidor": {
+        "mappings": {
+            "properties": {
+                "conteudo": {
+                    "type": "text",
+                    "term_vector": "with_positions_offsets",
+                    "fields": {
+                        "keyword": {
+                            "type": "keyword",
+                            "ignore_above": 256
+                        }
+                    }
+                },
+                "embedding_vector": {
+                    "type": "dense_vector",
+                    "dims": 768
+                },
+                "data": {
+                    "type": "date"
+                },
+                "autor": {
+                    "type": "text",
+                    "fields": {
+                        "keyword": {
+                            "type": "keyword",
+                            "ignore_above": 256
+                        }
+                    }
+                },
+                "id_historico": {
+                    "type": "text",
+                    "fields": {
+                        "keyword": {
+                            "type": "keyword",
+                            "ignore_above": 256
+                        }
+                    }
+                },
+                "id_reclamacao": {
+                    "type": "text",
+                    "fields": {
+                        "keyword": {
+                            "type": "keyword",
+                            "ignore_above": 256
+                        }
+                    }
+                }
+            }
+        }
+    },
     "diarios": {
         "mappings": {
             "properties": {

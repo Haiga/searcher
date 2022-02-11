@@ -131,7 +131,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 # run the command "python manage.py collectstatic" to copy all static files to this folder
-STATIC_ROOT = '/home/rafael/UFMG/MPMG/M05/search_engine/assets/'
+STATIC_ROOT = '/home/rafael/UFMG/MPMG/M05/web/assets/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')

@@ -15,10 +15,10 @@ pandas==1.0.4
 djangorestframework==3.11.1
 nltk==3.4.5
 numpy==1.17.0
-spacy==2.0.12
+#spacy==2.0.12
 wrapt==1.11.1
 tensorflow==2.2.0
-torch==1.6.0+cpu -f https://download.pytorch.org/whl/torch_stable.html
+torch==1.6.0
 transformers==4.0.0
 html2text==2020.1.16
 pyyaml==5.4.1 

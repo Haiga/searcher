@@ -15,10 +15,12 @@ from sentence_transformers import SentenceTransformer, models
 from torch import nn
 import numpy as np
 from nltk import tokenize
+
 nltk.download('punkt')
 
 from os import listdir
 from os.path import isfile, join
+import psycopg2 as pg2
 
 
 def list_files(path):
@@ -26,8 +28,8 @@ def list_files(path):
     List all files from a given folder
     """
     if path[-1] != "/":
-        path = path+"/"
-    return [path+f for f in listdir(path) if isfile(join(path, f))]
+        path = path + "/"
+    return [path + f for f in listdir(path) if isfile(join(path, f))]
 
 
 def get_sentences(text):
@@ -71,17 +73,20 @@ def parse_date(text):
             pass
     raise ValueError('no valid date format found')
 
+
 class Indexer:
 
-    def __init__(self, elastic_address='localhost:9200', model_path="neuralmind/bert-base-portuguese-cased", username=None, password=None):
+    def __init__(self, elastic_address='localhost:9200', model_path="neuralmind/bert-base-portuguese-cased",
+                 username=None, password=None):
 
         self.ELASTIC_ADDRESS = elastic_address
 
         if username != None and password != None:
-            self.es = Elasticsearch([self.ELASTIC_ADDRESS], timeout=120, max_retries=3, retry_on_timeout=True, http_auth=(username, password))
+            self.es = Elasticsearch([self.ELASTIC_ADDRESS], timeout=120, max_retries=3, retry_on_timeout=True,
+                                    http_auth=(username, password))
         else:
             self.es = Elasticsearch([self.ELASTIC_ADDRESS], timeout=120, max_retries=3, retry_on_timeout=True)
-        
+
         self.model_path = model_path
         if self.model_path != "None":
             self.sentence_model = get_sentence_model(self.model_path)
@@ -93,7 +98,7 @@ class Indexer:
         Generates formated entries to indexed by the bulk API
         """
         file = open(file_path, encoding=encoding)
-        table = csv.DictReader(file,delimiter="\t")
+        table = csv.DictReader(file, delimiter="\t")
 
         file_count = open(file_path, encoding=encoding)
         table_count = csv.DictReader(file_count)
@@ -131,14 +136,87 @@ class Indexer:
                     doc[field_name] = line[field]
 
             if self.model_path != "None":
-                doc["embedding_vector"] = change_vector_precision(get_dense_vector(self.sentence_model, line['conteudo']))
+                doc["embedding_vector"] = change_vector_precision(
+                    get_dense_vector(self.sentence_model, line['conteudo']))
 
             yield {
                 "_index": index,
                 "_source": doc
             }
-        
-        print("Sentences mean: ", sentences_num/lines_num)
+
+        print("Sentences mean: ", sentences_num / lines_num)
+
+    def generate_formated_table_lines(self, index, encoding="utf8"):
+
+        conn = pg2.connect(host='localhost', port='5000', database='chatbot_p03', user='chatbot', password='chatbot')
+        cur = conn.cursor()
+        cur.execute('select * from public.historico')
+        records = cur.fetchall()
+
+        sentences_num = 0
+        columns = ['id_historico',
+                   'autor',
+                   'conteudo',
+                   'data',
+                   'id_reclamacao']
+        COLUMN_TO_PROCESS = 'conteudo'
+        #
+        # columns = table.fieldnames.copy()
+        #
+        # rows = list(table_count)
+        lines_num = len(records)
+        # for line in tqdm(table, total=lines_num):
+        for line in records:
+            line_temp = {}
+            cont_field = 0
+            for field in columns:
+                line_temp[field] = line[cont_field]
+                cont_field += 1
+
+            line = line_temp
+            doc = {}
+            for field in columns:
+                if line[field] == '':
+                    continue
+
+                field_name = field
+                field_type = None
+                if len(field.split(":")) > 1:
+                    field_name = field.split(":")[0]
+                    field_type = field.split(":")[-1]
+
+                if field_type == "list":
+                    doc[field_name] = eval(line[field])
+                elif field_name == 'data':
+                    if line[field] != '':
+                        try:
+                            element = parse_date(str(line[field]))
+                        except:
+                            x = 0
+                        timestamp = datetime.datetime.timestamp(element)
+                        doc[field_name] = timestamp
+                else:
+                    doc[field_name] = line[field]
+
+            if self.model_path != "None":
+                doc["embedding_vector"] = change_vector_precision(
+                    get_dense_vector(self.sentence_model, line[COLUMN_TO_PROCESS]))
+
+            yield {
+                "_index": index,
+                "_source": doc
+            }
+
+        print("Sentences mean: ", sentences_num / lines_num)
+        conn.close()
+    def table_indexer(self, index):
+
+        start = time.time()
+
+        responses = {}
+        responses[index] = helpers.bulk(self.es, self.generate_formated_table_lines(index))
+        end = time.time()
+        print("Indexing time: {:.4f} seconds.".format(end - start))
 
     def simple_indexer(self, files_to_index, index):
         """
@@ -148,15 +226,15 @@ class Indexer:
 
         responses = {}
         for csv_file in files_to_index:
-            #print("Indexing: " + csv_file)
-            responses[csv_file] =  helpers.bulk(self.es, self.generate_formated_csv_lines(csv_file, index) )
-            #print("  Response: " + str(responses[csv_file]))
+            # print("Indexing: " + csv_file)
+            responses[csv_file] = helpers.bulk(self.es, self.generate_formated_csv_lines(csv_file, index))
+            # print("  Response: " + str(responses[csv_file]))
 
-            if len(responses[csv_file][1]) > 0 :
+            if len(responses[csv_file][1]) > 0:
                 print("Detected error while indexing: " + csv_file)
             else:
                 end = time.time()
-                print("Indexing time: {:.4f} seconds.".format(end-start))
+                print("Indexing time: {:.4f} seconds.".format(end - start))
 
     def parallel_indexer(self, files_to_index, index, thread_count):
         """
@@ -169,7 +247,8 @@ class Indexer:
         for csv_file in files_to_index:
             try:
                 print("Indexing: " + csv_file + "...")
-                for success, info in helpers.parallel_bulk(self.es, self.generate_formated_csv_lines(csv_file, index), thread_count = thread_count, queue_size = thread_count): 
+                for success, info in helpers.parallel_bulk(self.es, self.generate_formated_csv_lines(csv_file, index),
+                                                           thread_count=thread_count, queue_size=thread_count):
                     if not success:
                         print("Detected error while indexing: " + csv_file)
                         error = True
@@ -181,7 +260,6 @@ class Indexer:
         if not error:
             print("All files indexed with no error.")
             end = time.time()
-            print("Indexing time: {:.4f} seconds.".format(end-start))
+            print("Indexing time: {:.4f} seconds.".format(end - start))
         else:
             print("Error while indexing.")
-

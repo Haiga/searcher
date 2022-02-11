@@ -159,7 +159,7 @@ class SearchFilterView(APIView):
 
     def _get_doc_types(self):
         # return [('Diários Oficiais','diarios'), ('Diários Segmentados', 'diarios_segmentado'), ('Processos','processos'), ('Licitações','licitacoes')]
-        return [('Relatos','relatos'), ('Reclame Aqui', 'reclameaqui'), ('Procon','procon')]
+        return [('Relatos','relatos'), ('Reclame Aqui', 'reclameaqui'), ('Procon','consumidor')]
 
     
     def _get_instances(self):

@@ -21,16 +21,16 @@ __pycache__/
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
-search_engine/db.sqlite3
-search_engine/mpmg/settings.py
+web/db.sqlite3
+web/mpmg/settings.py
 mpmg/services/migrations/
 
 # Django-Jenkins reports
 reports
 
 # Virtual env
-search_engine/env/
-search_engine/venv/
+web/env/
+web/venv/
 
 # Extensions
 *.sqlite3

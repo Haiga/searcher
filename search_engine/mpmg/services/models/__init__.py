@@ -4,6 +4,7 @@ from .log_search_click import LogSearchClick
 from .log_sugestoes import LogSugestoes
 from .diario import Diario
 from .relato import Relato
+from .consumidor import Consumidor
 from .diario_segmentado import DiarioSegmentado
 from .processo import Processo
 from .licitacao import Licitacao

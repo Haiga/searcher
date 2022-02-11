@@ -4,7 +4,7 @@
     <header>
         <nav class="searchbar navbar navbar-expand-md navbar-light bg-light">
             <div class="container">
-                <a class="navbar-brand" href="{% url 'search:index' %}">Procon</a>
+                <a class="navbar-brand" href="{% url 'search:index' %}">Procon - MG</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -59,7 +59,7 @@
                             </select>
                         </div>
 
-                        {% if filter_entities_list.cidade|length > 0 %}
+
                         <div class="form-group">
                             <label class="control-label mb-0">Incluir cidade:</label>
                             <select id="filter_cidade" name="filter_cidade" multiple="multiple">
@@ -70,9 +70,10 @@
                                 {% endfor %}
                             </select>
                         </div>
+                        {% if filter_entities_list.cidade|length > 0 %}
                         {% endif %}
 
-                        {% if filter_entities_list.estado|length > 0 %}
+
                         <div class="form-group">
                             <label class="control-label mb-0">Incluir estado:</label>
                             <select id="filter_estado" name="filter_estado" multiple="multiple">
@@ -83,9 +84,10 @@
                                 {% endfor %}
                             </select>
                         </div>
+                        {% if filter_entities_list.estado|length > 0 %}
                         {% endif %}
 
-                        {% if filter_entities_list.status|length > 0 %}
+
                         <div class="form-group">
                             <label class="control-label mb-0">Incluir status:</label>
                             <select id="filter_status" name="filter_status" multiple="multiple">
@@ -96,6 +98,7 @@
                                 {% endfor %}
                             </select>
                         </div>
+                        {% if filter_entities_list.status|length > 0 %}
                         {% endif %}
 
 
@@ -124,7 +127,7 @@
                                 {{ doc.status|safe }}
                             </div>
                             <div class="source-description">
-                                Data: {{ doc.data }}, Fonte: {{ doc.source }} Relatos
+                                Data: {{ doc.data }}, Fonte: {{ doc.source }} {% if doc.autor %}PROCON{% else %}Relatos{% endif %}
                             </div>
                         </div>
                     {% endfor %}
