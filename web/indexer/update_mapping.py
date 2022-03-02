@@ -99,7 +99,7 @@ if __name__ == "__main__":
     parser.add_argument("-force_reindexation", nargs='+', help="List of indices to force reindexation")
     parser.add_argument("-update_settings", nargs='+', help="List of indices to force settings update")
     parser.add_argument("-mappings_path", default="mappings.json", help="Path of the mappings json file that will be used")
-    parser.add_argument("-elastic_address", default="localhost:9200", help="Elasticsearch address. Format: <ip>:<port>")
+    parser.add_argument("-elastic_address", default="es:9200", help="Elasticsearch address. Format: <ip>:<port>")
     parser.add_argument("-username", nargs='?', help="Username to access elasticsearch if needed.")
     parser.add_argument("-password", nargs='?', help="Password to access elasticsearch if needed.")
 

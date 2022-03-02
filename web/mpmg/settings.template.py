@@ -140,7 +140,7 @@ STATICFILES_DIRS = [
 # Configure Elasticsearch server
 ELASTICSEARCH_DSL = {
     'default': {
-        'hosts': 'localhost:9200'
+        'hosts': 'es:9200'
     },
 }
 

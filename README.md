@@ -42,3 +42,21 @@
 
 
 
+# Run on docker
+
+> docker-compose build
+
+> docker-compose up -d
+
+> docker exec -it searcher_web_1 /usr/local/bin/python manage.py migrate
+
+> docker exec -it searcher_web_1 /usr/local/bin/python manage.py createsuperuser
+
+> docker exec -it searcher_web_1 /usr/local/bin/python manage.py collectstatic --noinput --clear
+
+
+> docker exec -it searcher_web_1 /usr/local/bin/python indexer/create_mappings.py -mappings_path indexer/mappings.json
+
+> docker exec -it searcher_web_1 /usr/local/bin/python indexer/fetcher.py
+
+> docker exec -it searcher_web_1 /usr/local/bin/python indexer/elastic_indexer.py -strategy simple -index relatos -d indexer/indices-sample/relatos

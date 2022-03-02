@@ -76,7 +76,7 @@ def parse_date(text):
 
 class Indexer:
 
-    def __init__(self, elastic_address='localhost:9200', model_path="neuralmind/bert-base-portuguese-cased",
+    def __init__(self, elastic_address='es:9200', model_path="neuralmind/bert-base-portuguese-cased",
                  username=None, password=None):
 
         self.ELASTIC_ADDRESS = elastic_address
@@ -109,41 +109,46 @@ class Indexer:
 
         rows = list(table_count)
         lines_num = len(rows)
+        total_not_indexed = 0
         for line in tqdm(table, total=lines_num):
-            line = dict(line)
-            doc = {}
-            for field in columns:
-                if line[field] == '':
-                    continue
+            try:
+                line = dict(line)
+                doc = {}
+                for field in columns:
+                    if line[field] == '':
+                        continue
 
-                field_name = field
-                field_type = None
-                if len(field.split(":")) > 1:
-                    field_name = field.split(":")[0]
-                    field_type = field.split(":")[-1]
+                    field_name = field
+                    field_type = None
+                    if len(field.split(":")) > 1:
+                        field_name = field.split(":")[0]
+                        field_type = field.split(":")[-1]
 
-                if field_type == "list":
-                    doc[field_name] = eval(line[field])
-                elif field_name == 'data':
-                    if line[field] != '':
-                        try:
-                            element = parse_date(line[field])
-                        except:
-                            x = 0
-                        timestamp = datetime.datetime.timestamp(element)
-                        doc[field_name] = timestamp
-                else:
-                    doc[field_name] = line[field]
+                    if field_type == "list":
+                        doc[field_name] = eval(line[field])
+                    elif field_name == 'data':
+                        if line[field] != '':
+                            try:
+                                element = parse_date(line[field])
+                            except:
+                                x = 0
+                            timestamp = datetime.datetime.timestamp(element)
+                            doc[field_name] = timestamp
+                    else:
+                        doc[field_name] = line[field]
 
-            if self.model_path != "None":
-                doc["embedding_vector"] = change_vector_precision(
-                    get_dense_vector(self.sentence_model, line['conteudo']))
+                if self.model_path != "None":
+                    doc["embedding_vector"] = change_vector_precision(
+                        get_dense_vector(self.sentence_model, line['conteudo']))
 
-            yield {
-                "_index": index,
-                "_source": doc
-            }
+                yield {
+                    "_index": index,
+                    "_source": doc
+                }
+            except:
+                total_not_indexed += 1
 
+        print("total of docs not indexed: ", total_not_indexed)
         print("Sentences mean: ", sentences_num / lines_num)
 
     def generate_formated_table_lines(self, index, encoding="utf8"):
